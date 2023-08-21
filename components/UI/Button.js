@@ -1,7 +1,7 @@
 import * as React from "react";
 import { StyleProp, StyleSheet, TouchableOpacity, TouchableOpacityProps, View, ViewStyle } from "react-native";
 import { CustomText } from "./CustomText";
-import { colors, fonts, gradient, gradient2 } from "../utils";
+import { colors, fonts, gradient, gradient2 } from "../../utils";
 
 export function Button({
   textColor,

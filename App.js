@@ -7,7 +7,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { useFonts } from "expo-font";
 // import { RootSiblingParent } from "react-native-root-siblings";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { CustomText } from "./components/CustomText";
+import { CustomText } from "./components/UI/CustomText";
 import { RootStackNavigation } from "./RootStack";
 
 SplashScreen.preventAutoHideAsync();
@@ -72,7 +72,7 @@ export default function App() {
 
   return (
     <View style={styles.container} onLayout={onLayoutRootView}>
-      <StatusBar style="auto" />
+      <StatusBar barStyle="default" />
       <RootStackNavigation
         initialRouteName={
           isFirstLaunch
@@ -81,7 +81,7 @@ export default function App() {
               ? "LoginScreen"
               : isLoggedIn
                 ? "Dashboard"
-                : "WelcomeBackScreen"
+                : "OnboardingScreen"
         }
       />
       {/* <CustomText>Open up App.js to start working on your app!</CustomText> */}

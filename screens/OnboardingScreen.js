@@ -18,6 +18,7 @@ import { colors, spacing } from "../utils";
 // import Paginator from "./Paginator";
 
 import { Button, CustomText } from "../components";
+import { StatusBar } from "expo-status-bar";
 // import { colors, spacing } from "../utils";
 // import  * as React from "react";
 
@@ -28,24 +29,11 @@ export const OnboardingScreen = ({ navigation }) => {
 
   const scrollx = useRef(new Animated.Value(0)).current;
   const [selectedIndex, setSelectedIndex] = useState(0);
+  // console.log('selectedIndex', selectedIndex)
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <View style={styles.paginatorWrapper}>
-        {OnboardingData.map((item, index) => (
-          <View
-            style={[
-              styles.indicatorWrapper,
-              { borderColor: selectedIndex === index ? 'fff' : "#EEEEEE" },
-            ]}
-            key={index}
-          />
-        ))}
-      </View> */}
-
-      {/* <View style={styles.logoWrapper}>
-        <StashLogo />
-      </View> */}
+      <StatusBar style="auto" />
       <Swiper
         horizontal={true}
         autoplay={true}
@@ -68,65 +56,88 @@ export const OnboardingScreen = ({ navigation }) => {
             <SliderItem
               title={item.title}
               description={item.description}
-              // banner={<item.banner />}
-              banner={item.banner}
+              banner={<item.banner />}
+              // banner={item.banner}
               id={item.id}
             />
           </View>
         ))}
-        {/* <ImageBackground
-          source={require("../assets/img/onboarding/phone.png")}
-          style={styles.backgroundImage}
-          resizeMode="cover"
-        >
-          <View style={styles.overlay}>
-            <CustomText style={styles.overlayText}>
-              Your Overlay Text
-            </CustomText>
-          </View>
-        </ImageBackground>
-        <ImageBackground
-          source={require("../assets/img/onboarding/girl.png")}
-          style={styles.backgroundImage}
-          resizeMode="cover"
-        >
-          <View style={styles.overlay}>
-            <CustomText style={styles.overlayText}>
-              Your Overlay Text
-            </CustomText>
-          </View>
-        </ImageBackground> */}
       </Swiper>
 
-      <View style={styles.buttonWrapper}>
-        <Button
-          label="Create a free account"
-          buttonColor={colors.primary}
-          textColor={colors.white}
-          onPress={() => navigation.navigate("Onboarding")}
-          active
-        />
-        <View style={styles.loginwrapper}>
-          <CustomText fontSize={15} fontFamily="regular">
-            Have an account?{" "}
-          </CustomText>
-          <TouchableOpacity
+      <View
+        style={{
+          ...styles.buttonWrapper,
+          justifyContent: selectedIndex === 2 ? 'center' : 'space-between'
+        }}
+      >
+        {
+          selectedIndex !== 2 && <>
+            <TouchableOpacity
+              style={{
+                justifyContent: "center",
+                alignContent: "center",
+                marginLeft: 25,
+                height: 40,
+              }}
+              activeOpacity={0.6}
+              onPress={() => navigation.navigate("LoginScreen")}
+            >
+              <CustomText
+                style={{
+                  color: '#fff'
+                }}
+              >
+                Skip
+              </CustomText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                justifyContent: "center",
+                alignContent: "center",
+                backgroundColor: "#fff",
+                marginRight: 25,
+                height: 40,
+                width: 80,
+                borderRadius: 5,
+              }}
+              activeOpacity={0.6}
+              onPress={() => setSelectedIndex((index) => index + 1)}
+            >
+              <CustomText
+                style={{
+                  // color: '#fff'
+                  textAlign: 'center',
+                }}
+              >
+                Next
+              </CustomText>
+            </TouchableOpacity>
+          </>
+        }
+        {
+          selectedIndex === 2 && <TouchableOpacity
             style={{
               justifyContent: "center",
               alignContent: "center",
+              backgroundColor: "#fff",
+              // marginLeft: 25,
+              height: 40,
+              width: '80%',
+              borderRadius: 5,
             }}
             activeOpacity={0.6}
             onPress={() => navigation.navigate("LoginScreen")}
           >
-            <CustomText color={colors.primary}>Login</CustomText>
+            <CustomText
+              style={{
+                // color: '#fff'
+                textAlign: 'center',
+              }}
+            >
+              Get Started
+            </CustomText>
           </TouchableOpacity>
-        </View>
-        {/* <Button
-          label="Log In"
-          buttonColor={colors.primaryLight}
-          textColor={colors.primary}
-          onPress={() => navigation.navigate("LoginScreen")}
-        /> */}
+        }
       </View>
     </SafeAreaView>
   );
@@ -156,10 +167,13 @@ const styles = StyleSheet.create({
   },
 
   buttonWrapper: {
-    height: 90,
-    justifyContent: "space-between",
-    marginBottom: 20,
+    height: 95,
+    flexDirection: 'row',
+    // justifyContent: "space-between",
+    // alignItems: 'center',
     paddingHorizontal: Platform.OS === "ios" ? spacing.wrapper : 0,
+    backgroundColor: '#000000',
+    paddingTop: 10,
   },
 
   dataWrapper: {

@@ -3,7 +3,7 @@ import { SvgXml } from "react-native-svg";
 
 export const Couple = () => {
   const xml = `
-  <svg width="360" height="800" viewBox="0 0 360 800" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg width="360" height="800" viewBox="0 0 400 800" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <rect x="-28" width="492" height="1019" fill="url(#pattern0)"/>
   <defs>
   <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -13,5 +13,5 @@ export const Couple = () => {
   </defs>
   </svg>  
     `;
-  return <SvgXml xml={xml} />;
+  return <SvgXml xml={xml} width={'100%'}/>;
 };

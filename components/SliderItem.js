@@ -1,10 +1,12 @@
 import * as React from "react";
 import { Dimensions, StyleSheet, Image, View, Text, ImageBackground } from "react-native";
-// import { LottieAnimation } from "../../components";
-import { colors, fonts } from "../utils";
-import Logo_white from "../assets/img/logo_white.png";
-import Logo from "../assets/img/logo.png";
-import { CustomText } from "./CustomText";
+import { LinearGradient } from "expo-linear-gradient";
+import { colors, fonts, spacing } from "../utils";
+// import Logo_white from "../assets/img/logo_white.png";
+// import Logo from "../assets/img/logo.png";
+import { CustomText } from "./UI/CustomText";
+import { Logo, Logo_white } from "../assets/img/onboarding";
+import { gradient } from "../utils/gradient";
 
 const imageLocation = [
   require("../assets/img/onboarding/phone.png"),
@@ -15,36 +17,42 @@ const { width, height } = Dimensions.get("screen");
 
 export function SliderItem({ title, description, banner, id }) {
   // console.log('banner', banner)
-  console.log('id', id)
+  // console.log('id', id)
   return (
     <View style={styles.container}>
-      <ImageBackground
-        // source={require("../assets/img/onboarding/girl.svg")}
-        // source={Logo}
-        // source={banner}
-        // source={require(`../assets/img/onboarding/${banner}`)}
-        // source={require(`${banner}`)}
-        source={imageLocation[id - 1]}
-        style={styles.backgroundImage}
-        resizeMode="cover"
+      {banner}
+      <View 
+      style={{
+        ...styles.content,
+        // marginLeft: id === 1 ? 0 : id === 1 ? 2 : 2
+      }}
       >
-        <View style={styles.content}>
-          <View>
-            <Image
-              // source={require('../assets/img/logo.svg')}
-              source={id % 2 === 0 ? Logo : Logo_white}
-              style={styles.avatarStyle}
-            />
+        <LinearGradient
+          colors={gradient.colors}
+          start={gradient.start}
+          end={gradient.end}
+        // style={{ borderRadius: 8 }}
+        >
+          <View style={styles.avatarStyle}>
+            {id % 2 === 0 ? <Logo /> : <Logo_white />}
           </View>
           <View style={styles.overlay}>
-            <CustomText style={styles.overlayText}>
-              Your Overlay Text
-            </CustomText>
+            <View style={styles.paginatorWrapper}>
+              {[1, 2, 3].map((item, index) => (
+                <View
+                  style={[
+                    styles.indicatorWrapper,
+                    { borderColor: (id - 1) === index ? '#fff' : "rgba(217, 217, 217, 0.5)" },
+                  ]}
+                  key={index}
+                />
+              ))}
+            </View>
             <CustomText style={styles.title}>{title}</CustomText>
             <CustomText style={styles.description}>{description}</CustomText>
           </View>
-        </View>
-      </ImageBackground>
+        </LinearGradient>
+      </View>
     </View>
   );
 }
@@ -54,20 +62,20 @@ const styles = StyleSheet.create({
     flex: 1,
     // alignItems: 'center',
     // justifyContent: 'center',
-    backgroundColor: 'pink'
+    backgroundColor: 'red'
   },
   title: {
-    fontSize: fonts.text.xxl,
+    fontSize: fonts.text.lg,
     fontFamily: "bold",
-    marginBottom: 5,
-    textAlign: "center",
+    marginBottom: 17,
+    // textAlign: "center",
     color: "#fff",
   },
   description: {
-    fontSize: fonts.text.md,
-    fontFamily: "medium",
+    fontSize: fonts.text.sm,
+    fontFamily: "regular",
     lineHeight: 27,
-    textAlign: "center",
+    // textAlign: "center",
     color: "#fff",
     // color: 'red'
   },
@@ -82,7 +90,12 @@ const styles = StyleSheet.create({
   },
   content: {
     flex: 1,
-    justifyContent: 'space-between'
+    // height: '50%',
+    width: '100%',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    // paddingLeft: 25
+    // backgroundColor: 'pink'
   },
   backgroundImage: {
     width: width,
@@ -97,8 +110,9 @@ const styles = StyleSheet.create({
     // justifyContent: 'flex-end',
     // alignSelf: 'flex-end',
     // alignItems: 'flex-end',
-    // marginTop: 50,
-    padding: 20,
+    marginTop: '75%',
+    paddingVertical: 80,
+    paddingLeft: 25
   },
   overlayText: {
     // color: 'white',
@@ -108,25 +122,21 @@ const styles = StyleSheet.create({
   },
   avatarStyle: {
     marginTop: 50,
-    marginLeft: 25
-  }
+    paddingLeft: 25
+    // marginLeft: 25
+  },
+
+  indicatorWrapper: {
+    borderWidth: 2,
+    width: width / 12,
+    marginRight: spacing.margin.sm,
+    borderRadius: 10,
+  },
+  paginatorWrapper: {
+    flexDirection: "row",
+    // height: 64,
+    height: 84,
+    // justifyContent: "center",
+    alignItems: "center",
+  },
 });
-
-
-    // <View style={styles.container}>
-
-    //   <View style={styles.logoWrapper}>
-    //     <Image
-    //       // source={require("../../../assets/main/png/event.jpg")}
-    //       source={Logo_white}
-    //       style={styles.eventImageStyle}
-    //     />
-    //   </View>
-
-    //   <View
-    //     style={styles.overlay}
-    //   // style={styles.bodyWrapper}
-    //   >
-    //     <CustomText style={styles.title}>{title}</CustomText>
-    //     <CustomText style={styles.description}>{description}</CustomText>
-    //   </View>

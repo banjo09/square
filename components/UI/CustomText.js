@@ -18,15 +18,11 @@ export function CustomText(props) {
     <Text
       {...props}
       style={[
+        { fontFamily: 'regular' },
         props.style,
-        {
-          // lineHeight: lineHeight && lineHeight,
-          // fontSize: fontSize,
-          // color: color,
-          fontFamily: props.fontFamily ? props.fontFamily : "regular",
-          // fontWeight: fontWeight,
-          // textAlign,
-        },
+        // {
+        //   fontFamily: props.fontFamily ? props.fontFamily : "regular",
+        // },
       ]}
     >
       {props.children}

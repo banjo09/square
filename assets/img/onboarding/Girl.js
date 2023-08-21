@@ -1,9 +1,9 @@
-import  * as React from "react";
+import * as React from "react";
 import { SvgXml } from "react-native-svg";
 
 export const Girl = () => {
   const xml = `
-  <svg width="360" height="800" viewBox="0 0 360 800" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <svg width="360" height="800" viewBox="0 0 405 800" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <rect x="-11" y="-10" width="1080" height="820" fill="url(#pattern0)"/>
   <defs>
   <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
@@ -13,5 +13,8 @@ export const Girl = () => {
   </defs>
   </svg>  
     `;
-  return <SvgXml xml={xml} />;
+  return <SvgXml
+    xml={xml}
+    width={'100%'}
+  />;
 };
